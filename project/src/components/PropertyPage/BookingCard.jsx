@@ -43,7 +43,7 @@ const BookingCard = ({ details }) => {
     }
     try {
       setLoading(true);
-      const orderResponse = await axios.post("http://localhost:8080/create-order", { amount });
+      const orderResponse = await axios.post("https://hotel-booking-app-ohkw.onrender.com/create-order", { amount });
       const order = orderResponse.data;
       const options = {
         key: razorpayKey,
@@ -59,7 +59,7 @@ const BookingCard = ({ details }) => {
             razorpay_signature: response.razorpay_signature,
           };
 
-          const verifyResponse = await axios.post("http://localhost:8080/verify-payment", paymentData);
+          const verifyResponse = await axios.post("https://hotel-booking-app-ohkw.onrender.com/verify-payment", paymentData);
           if (verifyResponse.data.status === "success") {
             const bookingData = {
               userId: localStorage.getItem("userId"),
@@ -68,7 +68,7 @@ const BookingCard = ({ details }) => {
               checkInDate: checkIn,
               checkOutDate: checkOut,
             };
-            const bookingResponse = await axios.post("http://localhost:8080/create-booking", bookingData);
+            const bookingResponse = await axios.post("https://hotel-booking-app-ohkw.onrender.com/create-booking", bookingData);
             if (bookingResponse.data.success) {
               alert("Payment successful! Your booking is confirmed.");
             } else {

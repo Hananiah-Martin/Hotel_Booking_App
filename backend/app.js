@@ -86,7 +86,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/auth/google/callback",
+      callbackURL: "https://hotel-booking-app-ohkw.onrender.com/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -145,7 +145,7 @@ app.get(
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );
-    res.redirect(`http://localhost:5173/oauth-callback?userId=${req.user._id}`);
+    res.redirect(`https://main.d1qffmg6zj1djj.amplifyapp.com/oauth-callback?userId=${req.user._id}`);
   }
 );
 
