@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaStar, FaRegCalendarAlt } from "react-icons/fa";
 import axios from "axios";
 import { useAuth } from "../../AuthContext";
 import { Link } from "react-router-dom";
-
+import {useNavigate} from "react-router-dom";
 const BookingCard = ({ details }) => {
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
@@ -15,7 +15,7 @@ const BookingCard = ({ details }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY;
   const { currentUser } = useAuth();
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (checkIn && checkOut) {
       const timeDiff = checkOut.getTime() - checkIn.getTime();
@@ -30,13 +30,14 @@ const BookingCard = ({ details }) => {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-
     return () => {
       document.body.removeChild(script);
     };
   }, []);
 
   const handlePayment = async () => {
+    alert("in payment");
+    console.log("rkey"+ razorpayKey);
     if (!checkIn || !checkOut) {
       alert("Please select check-in and check-out dates.");
       return;
@@ -71,6 +72,7 @@ const BookingCard = ({ details }) => {
             const bookingResponse = await axios.post("https://hotel-booking-app-ohkw.onrender.com/create-booking", bookingData);
             if (bookingResponse.data.success) {
               alert("Payment successful! Your booking is confirmed.");
+              navigate("/bookings");
             } else {
               alert("Booking failed. Please contact support.");
             }

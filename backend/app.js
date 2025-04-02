@@ -159,6 +159,7 @@ const razorpay = new Razorpay({
 });
 app.post("/create-order", async (req, res) => {
   try {
+    console.log("in payment");
     const options = {
       amount: req.body.amount * 100, // amount in smallest currency unit (paise)
       currency: "INR",
