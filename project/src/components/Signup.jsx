@@ -17,7 +17,7 @@ function Signup() {
   // Handle Google Sign-In
   const handleGoogleSignIn = () => {
     // Redirect to backend Google auth endpoint
-    window.location.href = 'http://localhost:8080/auth/google';
+    window.location.href = 'https://hotel-booking-app-ohkw.onrender.com/auth/google';
   };
 
   // Handle OAuth Callback
@@ -41,14 +41,14 @@ function Signup() {
   const handleLogout = async () => {
     localStorage.removeItem('authToken');
     setUser(null);
-    window.location.href = 'http://localhost:8080/auth/logout';
+    window.location.href = 'https://hotel-booking-app-ohkw.onrender.com/auth/logout';
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:8080/signup", {
+      const response = await axios.post("https://hotel-booking-app-ohkw.onrender.com/signup", {
         username,
         email,
         password,

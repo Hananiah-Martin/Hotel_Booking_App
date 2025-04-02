@@ -21,7 +21,7 @@ const Property = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/listing/${listingId}`);        
+        const response = await axios.get(`https://hotel-booking-app-ohkw.onrender.com/listing/${listingId}`);        
         setProperty(response.data);        
       } catch (error) {
         console.error('Error while fetching listings:', error);
@@ -37,7 +37,7 @@ const Property = () => {
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      await axios.delete(`http://localhost:8080/listing/${listingId}`);
+      await axios.delete(`https://hotel-booking-app-ohkw.onrender.com/listing/${listingId}`);
       setShowDeleteModal(false);
       // Custom success notification could be added here
       setTimeout(() => {

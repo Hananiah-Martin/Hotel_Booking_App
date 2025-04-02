@@ -98,7 +98,7 @@ const EditForm = () => {
 
       // Send the request to the backend endpoint
       const response = await axios.put(
-        `http://localhost:8080/listing/${propertyId}/edit`,
+        `https://hotel-booking-app-ohkw.onrender.com/listing/${propertyId}/edit`,
         listingFormData,
         {
           headers: {
@@ -122,7 +122,7 @@ const EditForm = () => {
     const fetchListingDetails = async () => {
       if (propertyId) {
         try {
-        const response = await axios.get(`http://localhost:8080/listing/${propertyId}`);
+        const response = await axios.get(`https://hotel-booking-app-ohkw.onrender.com/listing/${propertyId}`);
           setListing(response.data);
         } catch (err) {
           console.error("Cannot fetch user details: ", err);

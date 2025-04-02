@@ -51,7 +51,7 @@ const ReviewForm = () => {
     e.preventDefault();
     if (validateForm()) {
         formData.userId=userId;
-      const response=await axios.post(`http://localhost:8080/listing/${id}/reviews`,formData);
+      const response=await axios.post(`https://hotel-booking-app-ohkw.onrender.com/listing/${id}/reviews`,formData);
       navigate(`/property/${id}`);
       setSubmitted(true);
     }

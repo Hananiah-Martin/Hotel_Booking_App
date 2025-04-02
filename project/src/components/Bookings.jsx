@@ -9,7 +9,7 @@ const Bookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/bookings/${userId}`);
+        const response = await axios.get(`https://hotel-booking-app-ohkw.onrender.com/bookings/${userId}`);
         setBookings(response.data.bookings);
       } catch (error) {
         console.error("Error fetching bookings:", error);
@@ -60,7 +60,7 @@ const Bookings = () => {
   };
   const handleCancelBooking = async (bookingId) => {
     try { 
-      const response = await axios.put(`http://localhost:8080/cancel-booking/${bookingId}`);
+      const response = await axios.put(`https://hotel-booking-app-ohkw.onrender.com/cancel-booking/${bookingId}`);
     }catch (error) {
       console.error("Error cancelling booking:", error);
     }

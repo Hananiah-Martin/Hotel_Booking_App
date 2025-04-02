@@ -9,7 +9,7 @@ function Wishlist() {
     const fetchWishlist = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/listing/fetchWishList/${userId}`
+          `https://hotel-booking-app-ohkw.onrender.com/listing/fetchWishList/${userId}`
         );
         setWishList(response.data);
       } catch (error) {

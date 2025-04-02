@@ -15,7 +15,7 @@ function Login() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:8080/login", {
+      const response = await axios.post("https://hotel-booking-app-ohkw.onrender.com/login", {
         email,
         password,
       });

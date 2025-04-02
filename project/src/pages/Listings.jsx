@@ -9,7 +9,7 @@ function Listings() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch('http://localhost:8080/listing');
+        const response = await fetch('https://hotel-booking-app-ohkw.onrender.com/listing');
         const data = await response.json();
         setListings(data.allListings);
       } catch (error) {
@@ -30,7 +30,7 @@ function Listings() {
     const userId = localStorage.getItem('userId');
 
     try {
-      const response=await axios.post(`http://localhost:8080/listing/wishlist`,{userId,listingId:selectedProperty._id});
+      const response=await axios.post(`https://hotel-booking-app-ohkw.onrender.com/listing/wishlist`,{userId,listingId:selectedProperty._id});
       setIsModalOpen(false);
       setSelectedProperty(null);
     } catch (error) {

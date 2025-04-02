@@ -11,7 +11,7 @@ function FilterListings() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/listing");
+        const response = await axios.get("https://hotel-booking-app-ohkw.onrender.com/listing");
         setListings(response.data.allListings);
       } catch (error) {
         console.error("Error while fetching listings:", error);

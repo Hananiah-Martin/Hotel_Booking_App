@@ -94,7 +94,7 @@ const CreateListingForm = () => {
       listingFormData.append('listing[url]', preview);
 
       // Send the request to the backend endpoint
-      const response = await axios.post('http://localhost:8080/listing/newlisting', listingFormData, {
+      const response = await axios.post('https://hotel-booking-app-ohkw.onrender.com/listing/newlisting', listingFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
