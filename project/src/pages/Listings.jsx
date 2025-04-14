@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
 import { FaRupeeSign } from 'react-icons/fa';
 import axios from 'axios';
+
 function Listings() {
   const [listings, setListings] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchListings = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch('https://hotel-booking-app-ohkw.onrender.com/listing');
         const data = await response.json();
         setListings(data.allListings);
       } catch (error) {
         console.error('Error while fetching listings:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchListings();
@@ -30,7 +35,7 @@ function Listings() {
     const userId = localStorage.getItem('userId');
 
     try {
-      const response=await axios.post(`https://hotel-booking-app-ohkw.onrender.com/listing/wishlist`,{userId,listingId:selectedProperty._id});
+      const response = await axios.post(`https://hotel-booking-app-ohkw.onrender.com/listing/wishlist`, {userId, listingId: selectedProperty._id});
       setIsModalOpen(false);
       setSelectedProperty(null);
     } catch (error) {
@@ -44,57 +49,77 @@ function Listings() {
     window.location.href = `/property/${propertyId}`;
   };
 
+  // Loading skeleton component
+  const LoadingSkeleton = () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {[...Array(8)].map((_, index) => (
+        <div key={index} className="rounded-xl overflow-hidden shadow-md animate-pulse">
+          <div className="w-full h-64 bg-gray-300"></div>
+          <div className="p-4">
+            <div className="h-5 bg-gray-300 rounded w-3/4 mb-3"></div>
+            <div className="h-4 bg-gray-300 rounded w-1/2 mb-3"></div>
+            <div className="h-4 bg-gray-300 rounded w-1/4"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Available Properties</h1>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {listings.map((property) => (
-          <div key={property._id} className="group relative">
-            <div 
-              onClick={() => handlePropertyClick(property._id)}
-              className="cursor-pointer"
-            >
-              <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <div className="relative">
-                  <img
-                    src={property.image?.url || '/placeholder-image.png'}
-                    alt={property.country || 'Property'}
-                    className="w-full h-64 object-cover"
-                  />
-                </div>
-                
-                <div className="p-4">
-                  <div className="flex justify-between items-start">
-                    <h3 className="font-semibold text-lg group-hover:text-blue-500 transition-colors">
-                      {property.title}
-                    </h3>
+      {isLoading ? (
+        <LoadingSkeleton />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {listings.map((property) => (
+            <div key={property._id} className="group relative">
+              <div 
+                onClick={() => handlePropertyClick(property._id)}
+                className="cursor-pointer"
+              >
+                <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                  <div className="relative">
+                    <img
+                      src={property.image?.url || '/placeholder-image.png'}
+                      alt={property.country || 'Property'}
+                      className="w-full h-64 object-cover"
+                    />
                   </div>
                   
-                  <p className="text-gray-500 mt-1">{property.location}</p>
-    
-                  <p className="mt-2 font-semibold">₹{property.price} / night</p>
+                  <div className="p-4">
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-semibold text-lg group-hover:text-blue-500 transition-colors">
+                        {property.title}
+                      </h3>
+                    </div>
+                    
+                    <p className="text-gray-500 mt-1">{property.location}</p>
+      
+                    <p className="mt-2 font-semibold">₹{property.price} / night</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Wishlist Button */}
-            <button 
-              className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors z-10"
-              onClick={() => openWishlistModal(property)}
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 text-gray-600 hover:text-red-500" 
-                viewBox="0 0 24 24" 
-                fill="currentColor"
+              {/* Wishlist Button */}
+              <button 
+                className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors z-10"
+                onClick={() => openWishlistModal(property)}
               >
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </button>
-          </div>
-        ))}
-      </div>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5 text-gray-600 hover:text-red-500" 
+                  viewBox="0 0 24 24" 
+                  fill="currentColor"
+                >
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Tailwind CSS Modal */}
       {isModalOpen && selectedProperty && (
