@@ -110,10 +110,10 @@ const CreateListingForm = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-2xl border border-gray-100 my-10">
-      <div className="flex items-center mb-8">
+    <div className="max-w-4xl mx-auto p-4 sm:p-8 bg-white rounded-xl shadow-2xl border border-gray-100 my-4 sm:my-10">
+      <div className="flex items-center mb-6 sm:mb-8">
         <div className="w-2 h-8 bg-red-500 rounded mr-3"></div>
-        <h1 className="text-3xl font-bold text-gray-800">Create Your Listing</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Create Your Listing</h1>
       </div>
 
       {error && (
@@ -127,10 +127,10 @@ const CreateListingForm = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+        <div className="grid grid-cols-1 gap-4 sm:gap-8">
           {/* Title */}
-          <div className="col-span-2">
+          <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
               Listing Title
             </label>
@@ -146,7 +146,7 @@ const CreateListingForm = () => {
             />
           </div>
 
-          {/* Country */}
+          {/* Country and Location are now stacked on mobile */}
           <div>
             <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
               Country
@@ -163,30 +163,6 @@ const CreateListingForm = () => {
             />
           </div>
 
-          {/* Price */}
-          <div>
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
-              Price per Night
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <span className="text-gray-500 text-lg">$</span>
-              </div>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                required
-                className="w-full pl-8 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 shadow-sm hover:shadow"
-                placeholder="0.00"
-              />
-            </div>
-            <p className="mt-2 text-xs text-gray-500">Set a competitive price to attract guests</p>
-          </div>
-
-          {/* Location */}
           <div>
             <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
               Location
@@ -201,6 +177,29 @@ const CreateListingForm = () => {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 shadow-sm hover:shadow"
               placeholder="City, State"
             />
+          </div>
+
+          {/* Price */}
+          <div>
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+              Price per Night
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <span className="text-gray-500 text-lg">₹</span>
+              </div>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                required
+                className="w-full pl-8 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 shadow-sm hover:shadow"
+                placeholder="0.00"
+              />
+            </div>
+            <p className="mt-2 text-xs text-gray-500">Set a competitive price to attract guests</p>
           </div>
 
           {/* Landmark */}
@@ -221,18 +220,18 @@ const CreateListingForm = () => {
           </div>
 
           {/* Image Upload */}
-          <div className="col-span-2">
+          <div>
             <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
               Upload Photos
             </label>
-            <div className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg transition-all duration-300 ${preview ? 'bg-gray-50' : 'hover:bg-gray-50'}`}>
+            <div className={`mt-1 flex justify-center px-4 sm:px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg transition-all duration-300 ${preview ? 'bg-gray-50' : 'hover:bg-gray-50'}`}>
               <div className="space-y-1 text-center">
                 {preview ? (
                   <div className="mb-4">
                     <img
                       src={preview}
                       alt="Preview"
-                      className="mx-auto h-60 w-auto object-cover rounded-lg shadow-md"
+                      className="mx-auto h-40 sm:h-60 w-auto object-cover rounded-lg shadow-md"
                     />
                     <p className="mt-2 text-sm text-gray-600">Looking good! Click below to change.</p>
                   </div>
@@ -275,7 +274,7 @@ const CreateListingForm = () => {
           </div>
 
           {/* Description */}
-          <div className="col-span-2">
+          <div>
             <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
               Description
             </label>
@@ -294,23 +293,23 @@ const CreateListingForm = () => {
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-end mt-8">
+        <div className="flex flex-col sm:flex-row sm:justify-end mt-8 gap-4">
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="mr-4 px-6 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
+            className="w-full sm:w-auto px-6 py-3 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`px-8 py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300 transform hover:-translate-y-1 ${
+            className={`w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300 transform hover:-translate-y-1 ${
               isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
             }`}
           >
             {isSubmitting ? (
-              <div className="flex items-center">
+              <div className="flex items-center justify-center">
                 <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
