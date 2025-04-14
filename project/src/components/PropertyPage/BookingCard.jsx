@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FaStar, FaRegCalendarAlt } from "react-icons/fa";
 import axios from "axios";
 import { useAuth } from "../../AuthContext";
-import { Link } from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 const BookingCard = ({ details }) => {
   const [checkIn, setCheckIn] = useState(null);
@@ -36,8 +35,6 @@ const BookingCard = ({ details }) => {
   }, []);
 
   const handlePayment = async () => {
-    alert("in payment");
-    console.log("rkey"+ razorpayKey);
     if (!checkIn || !checkOut) {
       alert("Please select check-in and check-out dates.");
       return;
