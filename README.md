@@ -44,4 +44,3 @@ Users have the flexibility to **cancel existing bookings**, providing control an
 ---
 
 
-
