@@ -1,6 +1,6 @@
-# 🏡 Airbnb Clone – MERN Stack Full-Stack Application
+# 🏡Hotel Booking Platform – MERN Stack Full-Stack Application
 
-This project is a high-fidelity **Airbnb Clone**, developed using the **MERN (MongoDB, Express.js, React.js, Node.js)** stack. It replicates the essential functionalities of Airbnb with a modern UI, robust backend, and smooth user experience.
+This project developed using the **MERN (MongoDB, Express.js, React.js, Node.js)** stack. It replicates the essential functionalities of Airbnb with a modern UI, robust backend, and smooth user experience.
 
 Whether you're looking to book a stay or list your own property, this application offers a complete end-to-end workflow — from search and payment to reviews and booking management.
 
